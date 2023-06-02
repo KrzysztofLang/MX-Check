@@ -1,12 +1,5 @@
-﻿using DnsClient;
-using Microsoft.VisualBasic.FileIO;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 
 namespace MX_Check
 {
@@ -19,7 +12,7 @@ namespace MX_Check
             string domainMX;
             string option;
             string optionVar;
-            List<string> mxRecords = new List<string>();
+            List<string> mxRecords = new();
             
             Menu.Splash();
             Menu.Options();
@@ -52,11 +45,6 @@ namespace MX_Check
                 mxRecords.Add(domainName + "," + string.Join(" ", RecordCheck.GetMXRecords(domainName)));
 
             Menu.Splash();
-            foreach (string value in mxRecords)
-            {
-                Console.WriteLine(value);
-            }
-
             DomainFile.SaveFile(mxRecords);
             Console.ReadKey();
         }

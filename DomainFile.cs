@@ -6,7 +6,7 @@ namespace MX_Check
 {
     internal class DomainFile
     {
-        private List<string> domains = new List<string>();
+        private List<string> domains = new();
         private const string fileDir = "domenyMX.csv";
 
         public List<string> Domains { get => domains; set => domains = value; }
@@ -22,16 +22,12 @@ namespace MX_Check
         private void ReadDomains(string file)
         {
             var reader = new StreamReader(file);
-            bool firstRow = true;
 
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
                 var values = line.Split(',');
-                if (!firstRow)
-                    domains.Add(values[0]);
-                else
-                    firstRow = false;
+                domains.Add(values[0]);
             }
 
         }
@@ -40,6 +36,17 @@ namespace MX_Check
         {
             mxRecords.Insert(0, "domena,MX");
             File.WriteAllLines(fileDir, mxRecords);
+
+            Console.WriteLine("╔═════════════════════════════════════╗");
+            Console.WriteLine("║ Zapisano dane w pliku domenyMX.csv. ║");
+            Console.WriteLine("║ Poniżej podgląd zawartości.         ║");
+            Console.WriteLine("╚═════════════════════════════════════╝");
+            Console.WriteLine("\n");
+
+            foreach (string value in mxRecords)
+            {
+                Console.WriteLine(value);
+            }
         }
     }
 }

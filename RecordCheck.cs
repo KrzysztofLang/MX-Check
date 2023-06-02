@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MX_Check
 {
@@ -11,7 +9,7 @@ namespace MX_Check
     {
         public static List<string> GetMXRecords(string domain)
         {
-            List<string> mxRecords = new List<string>();
+            List<string> mxRecords = new();
 
             try
             {
