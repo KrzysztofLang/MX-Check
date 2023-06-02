@@ -1,9 +1,6 @@
-﻿using DnsClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace MX_Check
 {
@@ -13,9 +10,28 @@ namespace MX_Check
 
         public List<string> Domains { get => domains; set => domains = value; }
 
-        public static void ReadDomains(string file)
+        public File(string fileName)
         {
-            
+            ReadDomains(fileName);
+        }
+
+        private void ReadDomains(string file)
+        {
+            var reader = new StreamReader(file);
+            bool firstRow = true;
+
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                var values = line.Split(',');
+                if (!firstRow)
+                    domains.Add(values[0]);
+                else
+                    firstRow = false;
+            }
+
+            foreach (string value in domains)
+                Console.WriteLine(value);
         }
     }
 }
