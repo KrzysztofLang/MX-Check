@@ -12,6 +12,7 @@ namespace MX_Check
         public static List<string> GetMXRecords(string domain)
         {
             List<string> mxRecords = new List<string>();
+
             try
             {
                 var lookupClient = new LookupClient();
@@ -25,7 +26,6 @@ namespace MX_Check
             {
                 Console.WriteLine(ex.Message);
             }
-            foreach (string item in mxRecords) { Console.WriteLine(item); }
 
             return mxRecords;
         }

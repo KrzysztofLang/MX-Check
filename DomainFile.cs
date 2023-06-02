@@ -4,15 +4,19 @@ using System.IO;
 
 namespace MX_Check
 {
-    internal class File
+    internal class DomainFile
     {
         private List<string> domains = new List<string>();
+        private const string fileDir = "domenyMX.csv";
 
         public List<string> Domains { get => domains; set => domains = value; }
 
-        public File(string fileName)
+        public DomainFile(string fileName)
         {
-            ReadDomains(fileName);
+            if (fileName != "")
+            {
+                ReadDomains(fileName);
+            }
         }
 
         private void ReadDomains(string file)
@@ -30,8 +34,12 @@ namespace MX_Check
                     firstRow = false;
             }
 
-            foreach (string value in domains)
-                Console.WriteLine(value);
+        }
+
+        public static void SaveFile(List<string> mxRecords)
+        {
+            mxRecords.Insert(0, "domena,MX");
+            File.WriteAllLines(fileDir, mxRecords);
         }
     }
 }
